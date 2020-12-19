@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<h1>PELICULAS MARVIN</h1>
+<div class="row">
+  <div class="col-md-5">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <p>{{ message }}</p>
+
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+
+    <div class="card card-body">
+      <form action="/agregar_pelicula" method="POST">
+        <div class="form-group">
+          <input type="text" name="titulo" placeholder="Titulo" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="categoria" placeholder="Categoria" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" name="descripcion" placeholder="Descripcion" class="form-control">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn-primary btn-block"> Guardar
+          </button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-7">
+    <table class="table table-striped table-bordered bg-blue table-sm">
+      <thead>
+        <td>Titulo</td>
+        <td>Categoria</td>
+        <td>Descripcion</td>
+        <td>operaciones</td>
+      </thead>
+      <tbody>
+        {% for pelicula in peliculas %}
+        <tr>
+          <td>{{ pelicula.1 }}</td>
+          <td>{{ pelicula.2 }}</td>
+          <td>{{ pelicula.3 }}</td>
+          <td>
+            <a href="/editar_pelicula/{{pelicula.0}}" class="btn btn-secondary">Editar</a>
+            <a href="/eliminar_pelicula/{{pelicula.0}}" class="btn btn-danger">Eliminar</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

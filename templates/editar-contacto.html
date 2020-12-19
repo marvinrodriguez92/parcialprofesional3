@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+
+<form action="/actualizar/{{pelicula.0}}" method="POST">
+  
+
+    <input type="text" name="titulo" placeholder="Titulo" value="{{pelicula.1}}">
+    <input type="text" name="categoria" placeholder="Categoria" value="{{pelicula.2}}">
+    <input type="text" name="descripcion" placeholder="Descripcion" value="{{pelicula.3}}">
+
+  <button type="submit"> Guardar </button>
+</form>
+
+{% endblock %}
